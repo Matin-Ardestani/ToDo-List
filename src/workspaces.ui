@@ -69,7 +69,7 @@
      </size>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="main_title">
     <property name="geometry">
      <rect>
       <x>255</x>
@@ -982,7 +982,7 @@
      </widget>
     </widget>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="btn_addworkspace">
     <property name="geometry">
      <rect>
       <x>10</x>

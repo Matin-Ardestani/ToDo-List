@@ -11,13 +11,13 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Create Workspace</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: #fff; border-radius: 5px;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="photo">
     <property name="geometry">
      <rect>
       <x>290</x>
@@ -61,7 +61,7 @@
      <string>Name...</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="title">
     <property name="geometry">
      <rect>
       <x>35</x>
