@@ -34,7 +34,7 @@
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../../../.designer/img/close.png</normaloff>../../../.designer/img/close.png</iconset>
+      <normaloff>../img/close.png</normaloff>../img/close.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -60,7 +60,7 @@
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../../../.designer/img/minimize.png</normaloff>../../../.designer/img/minimize.png</iconset>
+      <normaloff>../img/minimize.png</normaloff>../img/minimize.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -1008,7 +1008,33 @@
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../../../.designer/img/plus.png</normaloff>../../../.designer/img/plus.png</iconset>
+      <normaloff>../img/plus.png</normaloff>../img/plus.png</iconset>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_close_2">
+    <property name="geometry">
+     <rect>
+      <x>555</x>
+      <y>15</y>
+      <width>25</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../img/moon.png</normaloff>../img/moon.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>20</width>
+      <height>20</height>
+     </size>
     </property>
    </widget>
   </widget>
