@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: #E4E4E4; border-radius: 5px;</string>
+   <string notr="true">background-color: #fff; border-radius: 5px;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="btn_close">
@@ -34,7 +34,7 @@
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../img/close.png</normaloff>../img/close.png</iconset>
+      <normaloff>../../../.designer/img/close.png</normaloff>../../../.designer/img/close.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -60,7 +60,7 @@
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../img/minimize.png</normaloff>../img/minimize.png</iconset>
+      <normaloff>../../../.designer/img/minimize.png</normaloff>../../../.designer/img/minimize.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -1008,7 +1008,7 @@
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../img/plus.png</normaloff>../img/plus.png</iconset>
+      <normaloff>../../../.designer/img/plus.png</normaloff>../../../.designer/img/plus.png</iconset>
     </property>
    </widget>
   </widget>
