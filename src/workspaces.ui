@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>ToDo List - WorkSpaces</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../img/logo.png</normaloff>../img/logo.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: #fff; border-radius: 5px;</string>
@@ -1011,7 +1015,7 @@
       <normaloff>../img/plus.png</normaloff>../img/plus.png</iconset>
     </property>
    </widget>
-   <widget class="QPushButton" name="btn_close_2">
+   <widget class="QPushButton" name="btn_changetheme">
     <property name="geometry">
      <rect>
       <x>555</x>

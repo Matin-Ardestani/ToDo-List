@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>ToDo List - Add WorkSpace</string>
+   <string>ToDo List - Add Board</string>
   </property>
   <property name="windowIcon">
    <iconset>
@@ -34,7 +34,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>../img/workspace.jpg</pixmap>
+     <pixmap>../img/boards.jpg</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -81,7 +81,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Create Workspace</string>
+     <string>Create Board</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
