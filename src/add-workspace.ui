@@ -18,23 +18,23 @@
     <normaloff>../img/logo.png</normaloff>../img/logo.png</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: #fff; border-radius: 5px;</string>
+   <string notr="true">background-color: #E4E4E4; border-radius: 5px;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="photo">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>-40</y>
-      <width>371</width>
-      <height>361</height>
+      <x>320</x>
+      <y>0</y>
+      <width>310</width>
+      <height>310</height>
      </rect>
     </property>
     <property name="text">
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>../img/workspace.jpg</pixmap>
+     <pixmap>../img/workspace.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -59,7 +59,7 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #E4E4E4; border-radius: 5px;</string>
+     <string notr="true">background-color: #C2C2C2; border-radius: 5px; color: #030613;</string>
     </property>
     <property name="placeholderText">
      <string>Name...</string>
@@ -79,6 +79,9 @@
       <family>Sans Serif</family>
       <pointsize>15</pointsize>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #030613;</string>
     </property>
     <property name="text">
      <string>Create Workspace</string>
@@ -103,7 +106,7 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #E4E4E4; border-radius: 5px;</string>
+     <string notr="true">background-color: #C2C2C2; border-radius: 5px; color: #030613;</string>
     </property>
     <property name="placeholderText">
      <string>Describtion...</string>
@@ -128,7 +131,7 @@
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #ABABAB; border-radius: 5px;</string>
+     <string notr="true">background-color: #ABABAB; border-radius: 5px; color: #030613;</string>
     </property>
     <property name="text">
      <string>Cancel</string>
@@ -153,7 +156,7 @@
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #47A36C; border-radius: 5px;</string>
+     <string notr="true">background-color: #47A36C; border-radius: 5px; color: #030613;</string>
     </property>
     <property name="text">
      <string>Create</string>
