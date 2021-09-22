@@ -147,7 +147,7 @@ QPushButton:hover{
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>../img/tasks.png</pixmap>
+      <pixmap>../../../.designer/img/tasks.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -157,7 +157,7 @@ QPushButton:hover{
    <widget class="QPushButton" name="btn_close">
     <property name="geometry">
      <rect>
-      <x>935</x>
+      <x>971</x>
       <y>10</y>
       <width>25</width>
       <height>25</height>
@@ -180,7 +180,7 @@ background-color: #d6d6d6;
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../img/close.png</normaloff>../img/close.png</iconset>
+      <normaloff>../../../.designer/img/close.png</normaloff>../../../.designer/img/close.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -192,7 +192,7 @@ background-color: #d6d6d6;
    <widget class="QPushButton" name="btn_minimize">
     <property name="geometry">
      <rect>
-      <x>900</x>
+      <x>936</x>
       <y>10</y>
       <width>25</width>
       <height>25</height>
@@ -215,7 +215,7 @@ background-color: #d6d6d6;
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../img/minimize.png</normaloff>../img/minimize.png</iconset>
+      <normaloff>../../../.designer/img/minimize.png</normaloff>../../../.designer/img/minimize.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -326,7 +326,7 @@ background-color: #d6d6d6;
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>../img/plus.png</normaloff>../img/plus.png</iconset>
+         <normaloff>../../../.designer/img/plus.png</normaloff>../../../.designer/img/plus.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -473,7 +473,7 @@ background-color: #d6d6d6;
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../img/delete.png</normaloff>../img/delete.png</iconset>
+          <normaloff>../../../.designer/img/delete.png</normaloff>../../../.designer/img/delete.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -605,7 +605,7 @@ background-color: #d6d6d6;
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../img/delete.png</normaloff>../img/delete.png</iconset>
+          <normaloff>../../../.designer/img/delete.png</normaloff>../../../.designer/img/delete.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -737,7 +737,7 @@ background-color: #d6d6d6;
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../img/delete.png</normaloff>../img/delete.png</iconset>
+          <normaloff>../../../.designer/img/delete.png</normaloff>../../../.designer/img/delete.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -869,7 +869,7 @@ background-color: #d6d6d6;
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../img/delete.png</normaloff>../img/delete.png</iconset>
+          <normaloff>../../../.designer/img/delete.png</normaloff>../../../.designer/img/delete.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -1001,7 +1001,7 @@ background-color: #d6d6d6;
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../img/delete.png</normaloff>../img/delete.png</iconset>
+          <normaloff>../../../.designer/img/delete.png</normaloff>../../../.designer/img/delete.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -1133,7 +1133,7 @@ background-color: #d6d6d6;
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../img/delete.png</normaloff>../img/delete.png</iconset>
+          <normaloff>../../../.designer/img/delete.png</normaloff>../../../.designer/img/delete.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -1265,7 +1265,7 @@ background-color: #d6d6d6;
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../img/delete.png</normaloff>../img/delete.png</iconset>
+          <normaloff>../../../.designer/img/delete.png</normaloff>../../../.designer/img/delete.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -1397,7 +1397,7 @@ background-color: #d6d6d6;
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../img/delete.png</normaloff>../img/delete.png</iconset>
+          <normaloff>../../../.designer/img/delete.png</normaloff>../../../.designer/img/delete.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -1529,7 +1529,7 @@ background-color: #d6d6d6;
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../img/delete.png</normaloff>../img/delete.png</iconset>
+          <normaloff>../../../.designer/img/delete.png</normaloff>../../../.designer/img/delete.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -1661,7 +1661,7 @@ background-color: #d6d6d6;
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../img/delete.png</normaloff>../img/delete.png</iconset>
+          <normaloff>../../../.designer/img/delete.png</normaloff>../../../.designer/img/delete.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -1793,7 +1793,7 @@ background-color: #d6d6d6;
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../img/delete.png</normaloff>../img/delete.png</iconset>
+          <normaloff>../../../.designer/img/delete.png</normaloff>../../../.designer/img/delete.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -1925,7 +1925,7 @@ background-color: #d6d6d6;
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../img/delete.png</normaloff>../img/delete.png</iconset>
+          <normaloff>../../../.designer/img/delete.png</normaloff>../../../.designer/img/delete.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -2108,7 +2108,7 @@ background-color: #d6d6d6;
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>../img/help.png</pixmap>
+       <pixmap>../../../.designer/img/help.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -2129,7 +2129,7 @@ background-color: #d6d6d6;
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>../img/todo.png</pixmap>
+       <pixmap>../../../.designer/img/todo.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
