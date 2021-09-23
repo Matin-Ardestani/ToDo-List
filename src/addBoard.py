@@ -9,32 +9,36 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from pathlib import Path
+
+path = str(Path.cwd())
 
 
-class Ui_MainWindow(object):
+class Ui_addBoard(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(630, 320)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../../../.designer/img/logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("%s/img/logo.png" % path), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
-        MainWindow.setStyleSheet("background-color: #E4E4E4; border-radius: 5px;")
+        MainWindow.setStyleSheet("background-color: #E4E4E4; border: 1px solid #030613; border-radius: 5px;")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.photo = QtWidgets.QLabel(self.centralwidget)
-        self.photo.setGeometry(QtCore.QRect(310, -10, 310, 310))
+        self.photo.setGeometry(QtCore.QRect(310, 5, 310, 310))
         self.photo.setText("")
-        self.photo.setPixmap(QtGui.QPixmap("../img/boards.png"))
+        self.photo.setPixmap(QtGui.QPixmap("%s/img/boards.png" % path))
         self.photo.setScaledContents(True)
         self.photo.setWordWrap(False)
         self.photo.setObjectName("photo")
+        self.photo.setStyleSheet(' border: 0px solid rgba(100,100,100,0);')
         self.name = QtWidgets.QLineEdit(self.centralwidget)
         self.name.setGeometry(QtCore.QRect(35, 75, 240, 35))
         font = QtGui.QFont()
         font.setFamily("Sans Serif")
         font.setPointSize(9)
         self.name.setFont(font)
-        self.name.setStyleSheet("background-color: #C2C2C2; border-radius: 5px; color: #030613;")
+        self.name.setStyleSheet("background-color: #C2C2C2; border: 0px solid rgba(100,100,100,0); border-radius: 5px; color: #030613;")
         self.name.setObjectName("name")
         self.title = QtWidgets.QLabel(self.centralwidget)
         self.title.setGeometry(QtCore.QRect(35, 20, 240, 35))
@@ -42,17 +46,17 @@ class Ui_MainWindow(object):
         font.setFamily("Sans Serif")
         font.setPointSize(15)
         self.title.setFont(font)
-        self.title.setStyleSheet("color: #030613;")
+        self.title.setStyleSheet("color: #030613; border: 0px solid rgba(100,100,100,0);")
         self.title.setAlignment(QtCore.Qt.AlignCenter)
         self.title.setObjectName("title")
-        self.discribtion = QtWidgets.QTextEdit(self.centralwidget)
-        self.discribtion.setGeometry(QtCore.QRect(35, 120, 240, 80))
+        self.description = QtWidgets.QTextEdit(self.centralwidget)
+        self.description.setGeometry(QtCore.QRect(35, 120, 240, 80))
         font = QtGui.QFont()
         font.setFamily("Sans Serif")
         font.setPointSize(9)
-        self.discribtion.setFont(font)
-        self.discribtion.setStyleSheet("background-color: #C2C2C2; border-radius: 5px; color: #030613;")
-        self.discribtion.setObjectName("discribtion")
+        self.description.setFont(font)
+        self.description.setStyleSheet("background-color: #C2C2C2; border: 0px solid rgba(100,100,100,0); border-radius: 5px; color: #030613;")
+        self.description.setObjectName("description")
         self.btn_cancel = QtWidgets.QPushButton(self.centralwidget)
         self.btn_cancel.setGeometry(QtCore.QRect(170, 240, 105, 40))
         font = QtGui.QFont()
@@ -60,7 +64,7 @@ class Ui_MainWindow(object):
         font.setPointSize(9)
         self.btn_cancel.setFont(font)
         self.btn_cancel.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.btn_cancel.setStyleSheet(" background-color: #ABABAB; border-radius: 5px; color: #030613;")
+        self.btn_cancel.setStyleSheet(" background-color: #ABABAB; border: 0px solid rgba(100,100,100,0); border-radius: 5px; color: #030613;")
         self.btn_cancel.setObjectName("btn_cancel")
         self.btn_create = QtWidgets.QPushButton(self.centralwidget)
         self.btn_create.setGeometry(QtCore.QRect(35, 240, 105, 40))
@@ -69,28 +73,29 @@ class Ui_MainWindow(object):
         font.setPointSize(9)
         self.btn_create.setFont(font)
         self.btn_create.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.btn_create.setStyleSheet("background-color: #47A36C; border-radius: 5px; color: #030613;")
+        self.btn_create.setStyleSheet("background-color: #47A36C; border: 0px solid rgba(100,100,100,0); border-radius: 5px; color: #030613;")
         self.btn_create.setObjectName("btn_create")
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        self.already_alarm = QtWidgets.QLabel(MainWindow)
+        self.already_alarm.setText('This workspace has already exsisted')
+        self.already_alarm.setGeometry(35,210,240,20)
+        self.already_alarm.setStyleSheet('border: 0px solid rgba(100,100,100,0) ; color: #E4E4E4')
+        self.already_alarm.setAlignment(QtCore.Qt.AlignCenter)
+        font = QtGui.QFont()
+        font.setFamily("Sans Serif")
+        font.setPointSize(9)
+        self.already_alarm.setFont(font)
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "ToDo List - Add Board"))
         self.name.setPlaceholderText(_translate("MainWindow", "Name..."))
         self.title.setText(_translate("MainWindow", "Create Board"))
-        self.discribtion.setPlaceholderText(_translate("MainWindow", "Describtion..."))
+        self.description.setPlaceholderText(_translate("MainWindow", "Describtion..."))
         self.btn_cancel.setText(_translate("MainWindow", "Cancel"))
         self.btn_create.setText(_translate("MainWindow", "Create"))
 
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())

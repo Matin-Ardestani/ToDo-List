@@ -11,12 +11,38 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from pathlib import Path
 import webbrowser
+import sys
 
 from addWorkspace import Ui_addWorkspace
+from addBoard import Ui_addBoard
 
 path = str(Path.cwd())
 
-#----------------------add workspace page-------------------------------
+#----------------------add board window----------------------------------
+class AddBoard(QtWidgets.QMainWindow):
+    def __init__(self):
+        QtWidgets.QMainWindow.__init__(self)
+        self.ui = Ui_addBoard()
+        self.ui.setupUi(self)
+        
+        # removing borders
+        self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+
+    def main(self):
+        self.mainwindow = AddBoard()
+        self.mainwindow.show()
+        self.close()
+
+    def mousePressEvent(self , evt):
+        self.oldPos = evt.globalPos()
+
+    def mouseMoveEvent(self , evt):
+        delta = QtCore.QPoint(evt.globalPos() - self.oldPos)
+        self.move(self.x() + delta.x(), self.y() + delta.y())
+        self.oldPos = evt.globalPos()
+
+#----------------------add workspace window-------------------------------
 class AddWorkspace(QtWidgets.QMainWindow):
     def __init__(self):
         QtWidgets.QMainWindow.__init__(self)
@@ -41,7 +67,7 @@ class AddWorkspace(QtWidgets.QMainWindow):
         self.oldPos = evt.globalPos()
 
 
-#-------------------------------------Main page----------------------------------------
+#-------------------------------------Main window----------------------------------------
 class Ui_MainPage(object):
 
     #=================================Designer codes====================================
@@ -987,9 +1013,37 @@ class Ui_MainPage(object):
 
         # add workspace
         self.btn_addworkspace.clicked.connect(self.addWorkspace_func)
-        self.workspaces = {} # 'work space name' : [('board name','board discribtion), #each item is a board]
+        self.workspaces = {} # 'work space name' : [('board name','board description), #each item is a board]
         self.select_workspace.currentIndexChanged.connect(self.showBoards)
 
+        # add board
+        self.btn_addboard = QtWidgets.QPushButton(self.frame_2)
+        self.btn_addboard.setGeometry(10,10,202,140)
+        self.btn_addboard.setText('Add Board')
+        self.btn_addboard.setStyleSheet('border: 1px solid #030613;')
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("%s/img/plus.png" % path), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_addboard.setIcon(icon)
+        self.btn_addboard.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+
+        self.btn_addboard.clicked.connect(self.addBoard_func)
+
+        self.btn_addboard.hide()
+
+        # delete board
+        self.board_delete1.clicked.connect(lambda: self.deleteBoard_func(1))
+        self.board_delete2.clicked.connect(lambda: self.deleteBoard_func(2))
+        self.board_delete3.clicked.connect(lambda: self.deleteBoard_func(3))
+        self.board_delete4.clicked.connect(lambda: self.deleteBoard_func(4))
+        self.board_delete5.clicked.connect(lambda: self.deleteBoard_func(5))
+        self.board_delete6.clicked.connect(lambda: self.deleteBoard_func(6))
+        self.board_delete7.clicked.connect(lambda: self.deleteBoard_func(7))
+        self.board_delete8.clicked.connect(lambda: self.deleteBoard_func(8))
+        self.board_delete9.clicked.connect(lambda: self.deleteBoard_func(9))
+        self.board_delete10.clicked.connect(lambda: self.deleteBoard_func(10))
+        self.board_delete11.clicked.connect(lambda: self.deleteBoard_func(11))
+        self.board_delete12.clicked.connect(lambda: self.deleteBoard_func(12))
+        
 
 
     #------------------------------Designer codes
@@ -1028,14 +1082,18 @@ class Ui_MainPage(object):
         def addworkspace_item():
             name = self.addworkspace.ui.name.text()
 
+            # check if all blanks are filled
             if (name.strip() == ''):
                 self.addworkspace.ui.already_alarm.setStyleSheet('border: 0px solid rgba(100,100,100,0) ; color:  rgb(164, 0, 0)')
                 self.addworkspace.ui.already_alarm.setText('Fill all blanks')
             else:
+                # check if the name is not already existed
                 if name in self.workspaces:
                     self.addworkspace.ui.already_alarm.setStyleSheet('border: 0px solid rgba(100,100,100,0) ; color:  rgb(164, 0, 0)')
+                    self.addworkspace.ui.already_alarm.setText('This workspace has already exsisted')
                 else:
                     self.workspaces[name] = []
+                    # add workspace to the combo box
                     self.select_workspace.addItem(str(name))
                     self.addworkspace.close()
                 
@@ -1043,6 +1101,7 @@ class Ui_MainPage(object):
         self.addworkspace.ui.btn_cancel.clicked.connect(lambda: self.addworkspace.close())
         self.addworkspace.ui.btn_create.clicked.connect(addworkspace_item)
 
+    # show workspace's boards
     def showBoards(self):
         current_text = self.select_workspace.currentText()
         if len(self.workspaces[current_text]) == 0:
@@ -1058,6 +1117,8 @@ class Ui_MainPage(object):
             self.board_item10.hide()
             self.board_item11.hide()
             self.board_item12.hide()
+            self.btn_addboard.show()
+            self.btn_addboard.setGeometry(10,10,202,140)
         elif len(self.workspaces[current_text]) == 1:
             self.board_item1.show()
             self.board_item2.hide()
@@ -1075,6 +1136,9 @@ class Ui_MainPage(object):
             values = self.workspaces[current_text]
             self.board_title1.setText(values[0][0])
             self.board_dis1.setText(values[0][1])
+
+            self.btn_addboard.show()
+            self.btn_addboard.setGeometry(222,10,202,140)
 
             
         elif len(self.workspaces[current_text]) == 2:
@@ -1097,6 +1161,9 @@ class Ui_MainPage(object):
             self.board_dis1.setText(values[0][1])
             self.board_title2.setText(values[1][0])
             self.board_dis2.setText(values[1][1])
+
+            self.btn_addboard.show()
+            self.btn_addboard.setGeometry(434,10,202,140)
 
             
         elif len(self.workspaces[current_text]) == 3:
@@ -1121,6 +1188,9 @@ class Ui_MainPage(object):
             self.board_title3.setText(values[2][0])
             self.board_dis3.setText(values[2][1])
 
+            self.btn_addboard.show()
+            self.btn_addboard.setGeometry(646,10,202,140)
+
         elif len(self.workspaces[current_text]) == 4:
             self.board_item1.show()
             self.board_item2.show()
@@ -1144,6 +1214,9 @@ class Ui_MainPage(object):
             self.board_dis3.setText(values[2][1])
             self.board_title4.setText(values[3][0])
             self.board_dis4.setText(values[3][1])
+
+            self.btn_addboard.show()
+            self.btn_addboard.setGeometry(10,160,202,140)
 
 
         elif len(self.workspaces[current_text]) == 5:
@@ -1171,6 +1244,9 @@ class Ui_MainPage(object):
             self.board_dis4.setText(values[3][1])
             self.board_title5.setText(values[4][0])
             self.board_dis5.setText(values[4][1])
+
+            self.btn_addboard.show()
+            self.btn_addboard.setGeometry(222,160,202,140)
 
 
         elif len(self.workspaces[current_text]) == 6:
@@ -1200,6 +1276,9 @@ class Ui_MainPage(object):
             self.board_dis5.setText(values[4][1])
             self.board_title6.setText(values[5][0])
             self.board_dis6.setText(values[5][1])
+
+            self.btn_addboard.show()
+            self.btn_addboard.setGeometry(434,160,202,140)
 
 
         elif len(self.workspaces[current_text]) == 7:
@@ -1231,6 +1310,9 @@ class Ui_MainPage(object):
             self.board_dis6.setText(values[5][1])
             self.board_title7.setText(values[6][0])
             self.board_dis7.setText(values[6][1])
+
+            self.btn_addboard.show()
+            self.btn_addboard.setGeometry(646,160,202,140)
 
 
         elif len(self.workspaces[current_text]) == 8:
@@ -1264,6 +1346,9 @@ class Ui_MainPage(object):
             self.board_dis7.setText(values[6][1])
             self.board_title8.setText(values[7][0])
             self.board_dis8.setText(values[7][1])
+
+            self.btn_addboard.show()
+            self.btn_addboard.setGeometry(10,310,202,140)
 
 
         elif len(self.workspaces[current_text]) == 9:
@@ -1300,6 +1385,9 @@ class Ui_MainPage(object):
             self.board_title9.setText(values[8][0])
             self.board_dis9.setText(values[8][1])
 
+            self.btn_addboard.show()
+            self.btn_addboard.setGeometry(222,310,202,140)
+
         elif len(self.workspaces[current_text]) == 10:
             self.board_item1.show()
             self.board_item2.show()
@@ -1335,6 +1423,9 @@ class Ui_MainPage(object):
             self.board_dis9.setText(values[8][1])
             self.board_title10.setText(values[9][0])
             self.board_dis10.setText(values[9][1])
+
+            self.btn_addboard.show()
+            self.btn_addboard.setGeometry(434,310,202,140)
 
 
         elif len(self.workspaces[current_text]) == 11:
@@ -1374,6 +1465,9 @@ class Ui_MainPage(object):
             self.board_dis10.setText(values[9][1])
             self.board_title11.setText(values[10][0])
             self.board_dis11.setText(values[10][1])
+
+            self.btn_addboard.show()
+            self.btn_addboard.setGeometry(646,310,202,140)
 
 
         elif len(self.workspaces[current_text]) == 12:
@@ -1415,3 +1509,50 @@ class Ui_MainPage(object):
             self.board_dis11.setText(values[10][1])
             self.board_title12.setText(values[11][0])
             self.board_dis12.setText(values[11][1])
+
+            self.btn_addboard.hide()
+
+    # add board in workspace
+    def addBoard_func(self):
+        self.addboard = AddBoard()
+
+        def addingBoard():
+            name = self.addboard.ui.name.text()
+            des = self.addboard.ui.description.toPlainText()
+
+            # check if all blanks are fill
+            if (name.strip() == '') or (des.strip() == ''):
+                self.addboard.ui.already_alarm.setStyleSheet('border: 0px solid rgba(100,100,100,0) ; color:  rgb(164, 0, 0)')
+                self.addboard.ui.already_alarm.setText('Fill all blanks')
+            else:
+                # check if the name is not already existed
+                boards_name = []
+                for this in self.workspaces[str(self.select_workspace.currentText())]:
+                    boards_name.append( this[0] )
+                
+                if name in boards_name:
+                    self.addboard.ui.already_alarm.setStyleSheet('border: 0px solid rgba(100,100,100,0) ; color:  rgb(164, 0, 0)')
+                    self.addboard.ui.already_alarm.setText('This board has already exsisted')
+                else:
+                    # append new board's information to the boards list in workspaces dict
+                    self.workspaces[str(self.select_workspace.currentText())].append((name,des))
+                    self.addboard.close()
+
+            # show new board
+            self.showBoards()
+
+        self.addboard.ui.btn_cancel.clicked.connect(lambda: self.addboard.close())
+        self.addboard.ui.btn_create.clicked.connect(addingBoard)
+
+        self.addboard.show()
+
+    # delete board in workspace
+    def deleteBoard_func(self , item):
+        # delete the board from boards list
+        for this in range(0 , len(self.workspaces[str(self.select_workspace.currentText())]) ):
+            if this + 1 == item:
+                self.workspaces[str(self.select_workspace.currentText())].pop(this)
+
+        # show boards (without the deleted board)
+        self.showBoards()
+        

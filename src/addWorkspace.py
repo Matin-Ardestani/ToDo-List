@@ -71,7 +71,7 @@ class Ui_addWorkspace(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         self.already_alarm = QtWidgets.QLabel(MainWindow)
-        self.already_alarm.setText('This workspace has already exsisted.')
+        self.already_alarm.setText('This workspace has already exsisted')
         self.already_alarm.setGeometry(35,210,240,20)
         self.already_alarm.setStyleSheet('border: 0px solid rgba(100,100,100,0) ; color: #E4E4E4')
         self.already_alarm.setAlignment(QtCore.Qt.AlignCenter)
