@@ -180,7 +180,7 @@ background-color: #d6d6d6;
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../../../.designer/img/close.png</normaloff>../../../.designer/img/close.png</iconset>
+      <normaloff>../img/close.png</normaloff>../img/close.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -708,10 +708,30 @@ You can support him using below links.</string>
      </widget>
     </widget>
    </widget>
+   <widget class="QFrame" name="frame_3">
+    <property name="geometry">
+     <rect>
+      <x>139</x>
+      <y>-6</y>
+      <width>861</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #C2C2C2;</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+   </widget>
    <zorder>sidebar</zorder>
    <zorder>pages</zorder>
    <zorder>btn_minimize</zorder>
    <zorder>btn_close</zorder>
+   <zorder>frame_3</zorder>
   </widget>
  </widget>
  <resources/>
