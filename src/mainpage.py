@@ -11,12 +11,28 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from pathlib import Path
 import webbrowser
-import sys
+import sqlite3
 
 from addWorkspace import Ui_addWorkspace
 from addBoard import Ui_addBoard
 
-path = str(Path.cwd())
+path = str(Path.cwd()) # get current directory for pathes
+
+# connect to database file ( info.db )
+connection = sqlite3.connect('C://Users/ardes/Desktop/ToDo-List/src/info.db')
+cursor = connection.cursor()
+
+# create tables
+cursor.execute("DROP TABLE workspaces;")
+cursor.execute("DROP TABLE boards;")
+cursor.execute("DROP TABLE lists;")
+cursor.execute("DROP TABLE tasks;")
+cursor.execute("CREATE TABLE workspaces( name VARCHAR(100) PRIMARY KEY );")
+cursor.execute("CREATE TABLE boards( boardname VARCHAR(100) PRIMARY KEY , workspace VARCHAR(100) );")
+cursor.execute("CREATE TABLE lists( listname VARCHAR(100) PRIMARY KEY , board VARCHAR(100) , FOREIGN KEY(board) REFERENCES boards(boardname) );")
+cursor.execute("CREATE TABLE tasks( taskname VARCHAR(100) PRIMARY KEY, list VARCHAR(100) , FOREIGN KEY(list) REFERENCES lists(listname) );")
+
+
 
 #----------------------add board window----------------------------------
 class AddBoard(QtWidgets.QMainWindow):
@@ -355,7 +371,6 @@ class Ui_MainPage(object):
 
         self.retranslateUi(MainWindow)
         self.pages.setCurrentIndex(0)
-        self.btn_close.clicked.connect(MainWindow.close)
         self.btn_minimize.clicked.connect(MainWindow.showMinimized)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         self.filling = QtWidgets.QFrame(MainWindow)
@@ -955,7 +970,9 @@ class Ui_MainPage(object):
         self.board_open12.setText(("Open"))
 
         #==========================My codes===========================================
+        global cursor , connection
         self.btn_close.setStyleSheet('QPushButton{background-color: #C2C2C2;border-radius: 3px;}QPushButton:hover{background-color: #d6d6d6;}')
+        self.btn_close.clicked.connect(lambda: [MainWindow.close() , cursor.close() , connection.close()])
         self.btn_minimize.setStyleSheet('QPushButton{background-color: #C2C2C2;border-radius: 3px;}QPushButton:hover{background-color: #d6d6d6;}')
         self.btn_workspace.setStyleSheet('background-color: rgba(120, 91, 151, 0.9); color: #030613; border-radius: 0px;')
 
@@ -1074,6 +1091,23 @@ class Ui_MainPage(object):
 
     #-----------------------------My Functions--------------------------------------
 
+    # add datas to database
+    def workspaceDB(self , name):
+        global cursor , connection
+        quary = "INSERT INTO workspaces VALUES(\'%s\');" % name
+        cursor.execute(quary)
+
+    def boardDB(self , name , workspace):
+        global cursor , connection
+        quary = "INSERT INTO boards VALUES(\'%s\' , \'%s\');" % (name , workspace)
+        cursor.execute(quary)
+
+    def delete_boardDB(self , name):
+        global cursor , connection
+        quary = "DELETE FROM boards WHERE boardname=\'%s\' ;" % name
+        cursor.execute(quary)
+
+
     # add workspace
     def addWorkspace_func(self):
         self.addworkspace = AddWorkspace()
@@ -1093,8 +1127,11 @@ class Ui_MainPage(object):
                     self.addworkspace.ui.already_alarm.setText('This workspace has already exsisted')
                 else:
                     self.workspaces[name] = []
-                    # add workspace to the combo box
-                    self.select_workspace.addItem(str(name))
+
+                    self.select_workspace.addItem(str(name)) # add workspace to the combo box
+
+                    self.workspaceDB(str(name)) # add workspace to databse
+
                     self.addworkspace.close()
                 
 
@@ -1534,8 +1571,10 @@ class Ui_MainPage(object):
                     self.addboard.ui.already_alarm.setStyleSheet('border: 0px solid rgba(100,100,100,0) ; color:  rgb(164, 0, 0)')
                     self.addboard.ui.already_alarm.setText('This board has already exsisted')
                 else:
-                    # append new board's information to the boards list in workspaces dict
-                    self.workspaces[str(self.select_workspace.currentText())].append((name,des))
+                    self.workspaces[str(self.select_workspace.currentText())].append((name,des)) #append new board's information to the boards list in workspaces dict
+
+                    self.boardDB(name , str(self.select_workspace.currentText())) # add board to database
+
                     self.addboard.close()
 
             # show new board
@@ -1551,7 +1590,8 @@ class Ui_MainPage(object):
         # delete the board from boards list
         for this in range(0 , len(self.workspaces[str(self.select_workspace.currentText())]) ):
             if this + 1 == item:
-                self.workspaces[str(self.select_workspace.currentText())].pop(this)
+                self.delete_boardDB(self.workspaces[str(self.select_workspace.currentText())][this][0]) # delete board from database
+                self.workspaces[str(self.select_workspace.currentText())].pop(this) # delete board from list
 
         # show boards (without the deleted board)
         self.showBoards()
