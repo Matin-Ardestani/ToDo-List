@@ -149,7 +149,7 @@ background-color: #d6d6d6;
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="btn_addlist">
     <property name="geometry">
      <rect>
       <x>50</x>
@@ -371,7 +371,7 @@ background-color: #d6d6d6;
                 </size>
                </property>
               </widget>
-              <widget class="QPushButton" name="Task_check">
+              <widget class="QPushButton" name="check_task">
                <property name="geometry">
                 <rect>
                  <x>92</x>

@@ -12,9 +12,12 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from pathlib import Path
 import webbrowser
 import sqlite3
+import sys
 
 from addWorkspace import Ui_addWorkspace
 from addBoard import Ui_addBoard
+from board import Ui_BoardWindow
+from addList import Ui_addList
 
 path = str(Path.cwd()) # get current directory for pathes
 
@@ -33,6 +36,53 @@ cursor.execute("CREATE TABLE lists( listname VARCHAR(100) PRIMARY KEY , board VA
 cursor.execute("CREATE TABLE tasks( taskname VARCHAR(100) PRIMARY KEY, list VARCHAR(100) , FOREIGN KEY(list) REFERENCES lists(listname) );")
 
 
+#-----------------------add list page----------------------------------
+class AddListPage(QtWidgets.QMainWindow):
+    def __init__(self):
+        QtWidgets.QMainWindow.__init__(self)
+        self.ui = Ui_addList()
+        self.ui.setupUi(self)
+        
+        # removing borders
+        self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+
+    def main(self):
+        self.mainwindow = AddListPage()
+        self.mainwindow.show()
+        self.close()
+
+    def mousePressEvent(self , evt):
+        self.oldPos = evt.globalPos()
+
+    def mouseMoveEvent(self , evt):
+        delta = QtCore.QPoint(evt.globalPos() - self.oldPos)
+        self.move(self.x() + delta.x(), self.y() + delta.y())
+        self.oldPos = evt.globalPos()
+
+#-----------------------tasks page--------------------------------------
+class TasksPage(QtWidgets.QMainWindow):
+    def __init__(self):
+        QtWidgets.QMainWindow.__init__(self)
+        self.ui = Ui_BoardWindow()
+        self.ui.setupUi(self)
+        
+        # removing borders
+        self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+
+    def main(self):
+        self.mainwindow = TasksPage()
+        self.mainwindow.show()
+        self.close()
+
+    def mousePressEvent(self , evt):
+        self.oldPos = evt.globalPos()
+
+    def mouseMoveEvent(self , evt):
+        delta = QtCore.QPoint(evt.globalPos() - self.oldPos)
+        self.move(self.x() + delta.x(), self.y() + delta.y())
+        self.oldPos = evt.globalPos()
 
 #----------------------add board window----------------------------------
 class AddBoard(QtWidgets.QMainWindow):
@@ -1060,6 +1110,20 @@ class Ui_MainPage(object):
         self.board_delete10.clicked.connect(lambda: self.deleteBoard_func(10))
         self.board_delete11.clicked.connect(lambda: self.deleteBoard_func(11))
         self.board_delete12.clicked.connect(lambda: self.deleteBoard_func(12))
+
+        # open tasks page
+        self.board_open1.clicked.connect(lambda: self.openTasks(self.board_title1.text()))
+        self.board_open2.clicked.connect(lambda: self.openTasks(self.board_title2.text()))
+        self.board_open3.clicked.connect(lambda: self.openTasks(self.board_title3.text()))
+        self.board_open4.clicked.connect(lambda: self.openTasks(self.board_title4.text()))
+        self.board_open5.clicked.connect(lambda: self.openTasks(self.board_title5.text()))
+        self.board_open6.clicked.connect(lambda: self.openTasks(self.board_title6.text()))
+        self.board_open7.clicked.connect(lambda: self.openTasks(self.board_title7.text()))
+        self.board_open8.clicked.connect(lambda: self.openTasks(self.board_title8.text()))
+        self.board_open9.clicked.connect(lambda: self.openTasks(self.board_title9.text()))
+        self.board_open10.clicked.connect(lambda: self.openTasks(self.board_title10.text()))
+        self.board_open11.clicked.connect(lambda: self.openTasks(self.board_title11.text()))
+        self.board_open12.clicked.connect(lambda: self.openTasks(self.board_title12.text()))
         
 
 
@@ -1095,17 +1159,41 @@ class Ui_MainPage(object):
     def workspaceDB(self , name):
         global cursor , connection
         quary = "INSERT INTO workspaces VALUES(\'%s\');" % name
-        cursor.execute(quary)
+        cursor.execute(quary) # add workspace to database
 
     def boardDB(self , name , workspace):
         global cursor , connection
         quary = "INSERT INTO boards VALUES(\'%s\' , \'%s\');" % (name , workspace)
-        cursor.execute(quary)
+        cursor.execute(quary) # add board to database
 
     def delete_boardDB(self , name):
         global cursor , connection
         quary = "DELETE FROM boards WHERE boardname=\'%s\' ;" % name
-        cursor.execute(quary)
+        cursor.execute(quary) # delete board from database
+
+
+    def listDB(self , name , board):
+        global cursor , connection
+        quary = "INSERT INTO lists VALUES(\'%s\' , \'%s\')" % (name.strip() , board)
+
+        # check if name is filled
+        if name.strip() == '':
+            self.addlist.ui.already_alarm.setStyleSheet('border: 0px solid rgba(100,100,100,0) ; color:  rgb(164, 0, 0)')
+            self.addlist.ui.already_alarm.setText('Fill all blanks')
+        else:
+            try:
+                cursor.execute(quary) # add list to the database
+                self.addlist.close()
+                self.show_list(name)
+            except:
+                # list already exists alarm
+                self.addlist.ui.already_alarm.setStyleSheet('border: 0px solid rgba(100,100,100,0) ; color:  rgb(164, 0, 0)')
+
+
+    def add_task(self):
+        self.addtask = AddListPage()
+        self.addtask.ui.title.setText('Create Task')
+        self.addtask.show()
 
 
     # add workspace
@@ -1139,7 +1227,7 @@ class Ui_MainPage(object):
         self.addworkspace.ui.btn_create.clicked.connect(addworkspace_item)
 
     # show workspace's boards
-    def showBoards(self):
+    def showBoards(self):  
         current_text = self.select_workspace.currentText()
         if len(self.workspaces[current_text]) == 0:
             self.board_item1.hide()
@@ -1595,4 +1683,139 @@ class Ui_MainPage(object):
 
         # show boards (without the deleted board)
         self.showBoards()
+      
+
+
+    # open tasks page
+    def openTasks(self , boardname):
+        self.taskspage = TasksPage()
+
+        def add_list(boardname):
+            self.addlist = AddListPage()
+
+            self.addlist.ui.btn_cancel.clicked.connect(lambda: self.addlist.close())
+            self.addlist.ui.btn_create.clicked.connect(lambda: [self.listDB( self.addlist.ui.name.text() , boardname )])
+
+            self.addlist.show()
+
+
+
+        def close_taskspage():
+            self.taskspage.close()
+
+        self.taskspage.ui.btn_backpage.clicked.connect(close_taskspage)     
+
+        self.taskspage.ui.btn_addlist.clicked.connect(lambda: add_list(boardname))
+
+        self.taskspage.ui.btn_addtask.hide()
+        self.taskspage.ui.btn_addtask.clicked.connect(self.add_task)
         
+        self.taskspage.show()
+
+
+
+
+    # show list item
+    def show_list(self , listname):
+        self.taskspage.ui.list = QtWidgets.QFrame(self.taskspage.ui.scrollAreaWidgetContents)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.taskspage.ui.list.sizePolicy().hasHeightForWidth())
+        self.taskspage.ui.list.setSizePolicy(sizePolicy)
+        self.taskspage.ui.list.setMinimumSize(QtCore.QSize(200, 450))
+        self.taskspage.ui.list.setStyleSheet("background-color: rgba(63, 41, 87, 0.8); border-radius: 5px;")
+        self.taskspage.ui.list.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.taskspage.ui.list.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.taskspage.ui.list.setObjectName("list")
+        self.taskspage.ui.list_title = QtWidgets.QLabel(self.taskspage.ui.list)
+        self.taskspage.ui.list_title.setGeometry(QtCore.QRect(0, 10, 202, 21))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        self.taskspage.ui.list_title.setFont(font)
+        self.taskspage.ui.list_title.setStyleSheet("background: none;")
+        self.taskspage.ui.list_title.setAlignment(QtCore.Qt.AlignCenter)
+        self.taskspage.ui.list_title.setObjectName("list_title")
+        self.taskspage.ui.scrollArea_2 = QtWidgets.QScrollArea(self.taskspage.ui.list)
+        self.taskspage.ui.scrollArea_2.setGeometry(QtCore.QRect(0, 50, 200, 68))
+        self.taskspage.ui.scrollArea_2.setStyleSheet("background-color: rgba(63, 41, 87, 0);")
+        self.taskspage.ui.scrollArea_2.setWidgetResizable(True)
+        self.taskspage.ui.scrollArea_2.setObjectName("scrollArea_2")
+        self.taskspage.ui.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
+        self.taskspage.ui.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 200, 68))
+        self.taskspage.ui.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
+        self.taskspage.ui.verticalLayout = QtWidgets.QVBoxLayout(self.taskspage.ui.scrollAreaWidgetContents_2)
+        self.taskspage.ui.verticalLayout.setObjectName("verticalLayout")
+        # self.taskspage.ui.task = QtWidgets.QFrame(self.taskspage.ui.scrollAreaWidgetContents_2)
+        # sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        # sizePolicy.setHorizontalStretch(0)
+        # sizePolicy.setVerticalStretch(0)
+        # sizePolicy.setHeightForWidth(self.taskspage.ui.task.sizePolicy().hasHeightForWidth())
+        # self.taskspage.ui.task.setSizePolicy(sizePolicy)
+        # self.taskspage.ui.task.setMinimumSize(QtCore.QSize(180, 50))
+        # self.taskspage.ui.task.setStyleSheet("background-color: #E4E4E4;")
+        # self.taskspage.ui.task.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        # self.taskspage.ui.task.setFrameShadow(QtWidgets.QFrame.Raised)
+        # self.taskspage.ui.task.setObjectName("task")
+        # self.taskspage.ui.task_name = QtWidgets.QLabel(self.taskspage.ui.task)
+        # self.taskspage.ui.task_name.setGeometry(QtCore.QRect(0, 0, 180, 20))
+        # font = QtGui.QFont()
+        # font.setFamily("Arial")
+        # font.setPointSize(9)
+        # self.taskspage.ui.task_name.setFont(font)
+        # self.taskspage.ui.task_name.setAlignment(QtCore.Qt.AlignCenter)
+        # self.taskspage.ui.task_name.setObjectName("task_name")
+        # self.taskspage.ui.delete_task = QtWidgets.QPushButton(self.taskspage.ui.task)
+        # self.taskspage.ui.delete_task.setGeometry(QtCore.QRect(5, 25, 82, 20))
+        # font = QtGui.QFont()
+        # font.setFamily("Arial")
+        # font.setPointSize(9)
+        # self.taskspage.ui.delete_task.setFont(font)
+        # self.taskspage.ui.delete_task.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        # self.taskspage.ui.delete_task.setStyleSheet("background-color: #D55FAA; color: #030613;")
+        # self.taskspage.ui.delete_task.setText("")
+        # icon4 = QtGui.QIcon()
+        # icon4.addPixmap(QtGui.QPixmap("%s/img/delete.png" % path), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        # self.taskspage.ui.delete_task.setIcon(icon4)
+        # self.taskspage.ui.delete_task.setIconSize(QtCore.QSize(15, 15))
+        # self.taskspage.ui.delete_task.setObjectName("delete_task")
+        # self.taskspage.ui.check_task = QtWidgets.QPushButton(self.taskspage.ui.task)
+        # self.taskspage.ui.check_task.setGeometry(QtCore.QRect(92, 25, 82, 20))
+        # font = QtGui.QFont()
+        # font.setFamily("Arial")
+        # font.setPointSize(9)
+        # self.taskspage.ui.check_task.setFont(font)
+        # self.taskspage.ui.check_task.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        # self.taskspage.ui.check_task.setStyleSheet("background-color: #D55FAA; color: #030613;")
+        # self.taskspage.ui.check_task.setText("")
+        # icon5 = QtGui.QIcon()
+        # icon5.addPixmap(QtGui.QPixmap("%s/img/check.png" % path), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        # self.taskspage.ui.check_task.setIcon(icon5)
+        # self.taskspage.ui.check_task.setIconSize(QtCore.QSize(15, 15))
+        # self.taskspage.ui.check_task.setObjectName("check_task")
+        # self.taskspage.ui.verticalLayout.addWidget(self.taskspage.ui.task)
+        # self.taskspage.ui.scrollArea_2.setWidget(self.taskspage.ui.scrollAreaWidgetContents_2)
+        self.taskspage.ui.btn_addtask = QtWidgets.QPushButton(self.taskspage.ui.list)
+        self.taskspage.ui.btn_addtask.setGeometry(QtCore.QRect(10, 410, 180, 30))
+        self.taskspage.ui.btn_addtask.clicked.connect(self.add_task)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(9)
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap("%s/img/plus.png" % path), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.taskspage.ui.btn_addtask.setFont(font)
+        self.taskspage.ui.btn_addtask.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.taskspage.ui.btn_addtask.setStyleSheet("border: 1px solid #030613; color: #030613; background-color: rgba(100,100,100,0);")
+        self.taskspage.ui.btn_addtask.setIcon(icon3)
+        self.taskspage.ui.btn_addtask.setObjectName("btn_addtask")
+        self.taskspage.ui.horizontalLayout.addWidget(self.taskspage.ui.list)
+        self.taskspage.ui.scrollArea.setWidget(self.taskspage.ui.scrollAreaWidgetContents)
+        self.taskspage.ui.list_title.setText("%s" % listname)
+        self.taskspage.ui.task_name.setText("name")
+        self.taskspage.ui.btn_addtask.setText("Add Task")
+        
+        
+
+
+    
