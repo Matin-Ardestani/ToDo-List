@@ -14,7 +14,7 @@ from pathlib import Path
 path = str(Path.cwd())
 
 
-class Ui_addList(object):
+class Ui_addTask(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(630, 320)
@@ -86,6 +86,6 @@ class Ui_addList(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "ToDo List - Add Board"))
         self.name.setPlaceholderText(_translate("MainWindow", "List Name..."))
-        self.title.setText(_translate("MainWindow", "Create List"))
+        self.title.setText(_translate("MainWindow", "Create Task"))
         self.btn_cancel.setText(_translate("MainWindow", "Cancel"))
         self.btn_create.setText(_translate("MainWindow", "Create"))

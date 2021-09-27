@@ -122,7 +122,7 @@ background-color: #d6d6d6;
      </size>
     </property>
    </widget>
-   <widget class="QLabel" name="label_12">
+   <widget class="QLabel" name="title">
     <property name="geometry">
      <rect>
       <x>380</x>
@@ -149,42 +149,13 @@ background-color: #d6d6d6;
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="btn_addlist">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>8</y>
-      <width>160</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Sans Serif</family>
-      <pointsize>9</pointsize>
-     </font>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border: 1px solid #030613; color: #030613;</string>
-    </property>
-    <property name="text">
-     <string>Add List</string>
-    </property>
-    <property name="icon">
-     <iconset>
-      <normaloff>../img/plus.png</normaloff>../img/plus.png</iconset>
-    </property>
-   </widget>
-   <widget class="QFrame" name="llists_frame">
+   <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>50</y>
       <width>1000</width>
-      <height>500</height>
+      <height>530</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -199,11 +170,11 @@ background-color: #d6d6d6;
        <x>0</x>
        <y>0</y>
        <width>1000</width>
-       <height>500</height>
+       <height>530</height>
       </rect>
      </property>
-     <property name="horizontalScrollBarPolicy">
-      <enum>Qt::ScrollBarAsNeeded</enum>
+     <property name="styleSheet">
+      <string notr="true"/>
      </property>
      <property name="widgetResizable">
       <bool>true</bool>
@@ -214,12 +185,12 @@ background-color: #d6d6d6;
         <x>0</x>
         <y>0</y>
         <width>1000</width>
-        <height>500</height>
+        <height>530</height>
        </rect>
       </property>
-      <layout class="QHBoxLayout" name="horizontalLayout">
+      <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QFrame" name="list">
+        <widget class="QFrame" name="task_frame">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -228,12 +199,12 @@ background-color: #d6d6d6;
          </property>
          <property name="minimumSize">
           <size>
-           <width>200</width>
-           <height>450</height>
+           <width>970</width>
+           <height>50</height>
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: rgba(63, 41, 87, 0.8); border-radius: 5px;</string>
+          <string notr="true">background-color:  rgba(120, 91, 151, 0.8);</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -241,203 +212,87 @@ background-color: #d6d6d6;
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <widget class="QLabel" name="list_title">
+         <widget class="QLabel" name="task_name">
           <property name="geometry">
            <rect>
-            <x>0</x>
-            <y>10</y>
-            <width>202</width>
-            <height>21</height>
+            <x>10</x>
+            <y>0</y>
+            <width>830</width>
+            <height>50</height>
            </rect>
           </property>
           <property name="font">
            <font>
-            <family>Sans Serif</family>
-            <pointsize>11</pointsize>
+            <family>Arial</family>
+            <pointsize>9</pointsize>
            </font>
           </property>
           <property name="styleSheet">
            <string notr="true">background: none;</string>
           </property>
           <property name="text">
-           <string>List title</string>
+           <string>Learning Python</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
           </property>
          </widget>
-         <widget class="QScrollArea" name="scrollArea_2">
+         <widget class="QPushButton" name="task_delete">
           <property name="geometry">
            <rect>
-            <x>0</x>
-            <y>50</y>
-            <width>200</width>
-            <height>68</height>
-           </rect>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgba(63, 41, 87, 0);</string>
-          </property>
-          <property name="widgetResizable">
-           <bool>true</bool>
-          </property>
-          <widget class="QWidget" name="scrollAreaWidgetContents_2">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>0</y>
-             <width>200</width>
-             <height>68</height>
-            </rect>
-           </property>
-           <layout class="QVBoxLayout" name="verticalLayout">
-            <item>
-             <widget class="QFrame" name="task">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>180</width>
-                <height>50</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: #E4E4E4;</string>
-              </property>
-              <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
-              </property>
-              <widget class="QLabel" name="task_name">
-               <property name="geometry">
-                <rect>
-                 <x>0</x>
-                 <y>0</y>
-                 <width>180</width>
-                 <height>20</height>
-                </rect>
-               </property>
-               <property name="font">
-                <font>
-                 <family>Sans Serif</family>
-                 <pointsize>9</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>name</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
-               </property>
-              </widget>
-              <widget class="QPushButton" name="delete_task">
-               <property name="geometry">
-                <rect>
-                 <x>5</x>
-                 <y>25</y>
-                 <width>82</width>
-                 <height>20</height>
-                </rect>
-               </property>
-               <property name="font">
-                <font>
-                 <family>Sans Serif</family>
-                 <pointsize>9</pointsize>
-                </font>
-               </property>
-               <property name="cursor">
-                <cursorShape>PointingHandCursor</cursorShape>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">background-color: #D55FAA; color: #030613;</string>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="icon">
-                <iconset>
-                 <normaloff>../img/delete.png</normaloff>../img/delete.png</iconset>
-               </property>
-               <property name="iconSize">
-                <size>
-                 <width>15</width>
-                 <height>15</height>
-                </size>
-               </property>
-              </widget>
-              <widget class="QPushButton" name="check_task">
-               <property name="geometry">
-                <rect>
-                 <x>92</x>
-                 <y>25</y>
-                 <width>82</width>
-                 <height>20</height>
-                </rect>
-               </property>
-               <property name="font">
-                <font>
-                 <family>Sans Serif</family>
-                 <pointsize>9</pointsize>
-                </font>
-               </property>
-               <property name="cursor">
-                <cursorShape>PointingHandCursor</cursorShape>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">background-color: #D55FAA; color: #030613;</string>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="icon">
-                <iconset>
-                 <normaloff>../img/check.png</normaloff>../img/check.png</iconset>
-               </property>
-               <property name="iconSize">
-                <size>
-                 <width>15</width>
-                 <height>15</height>
-                </size>
-               </property>
-              </widget>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </widget>
-         <widget class="QPushButton" name="pushButton_2">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>410</y>
-            <width>180</width>
+            <x>910</x>
+            <y>10</y>
+            <width>50</width>
             <height>30</height>
            </rect>
-          </property>
-          <property name="font">
-           <font>
-            <family>Sans Serif</family>
-            <pointsize>9</pointsize>
-           </font>
           </property>
           <property name="cursor">
            <cursorShape>PointingHandCursor</cursorShape>
           </property>
           <property name="styleSheet">
-           <string notr="true">border: 1px solid #030613; color: #030613; background-color: rgba(100,100,100,0);</string>
+           <string notr="true">background-color: #D55FAA;</string>
           </property>
           <property name="text">
-           <string>Add Task</string>
+           <string/>
           </property>
           <property name="icon">
            <iconset>
-            <normaloff>../img/plus.png</normaloff>../img/plus.png</iconset>
+            <normaloff>../img/delete.png</normaloff>../img/delete.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="task_done">
+          <property name="geometry">
+           <rect>
+            <x>850</x>
+            <y>10</y>
+            <width>50</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: #D55FAA;</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>../img/check.png</normaloff>../img/check.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
           </property>
          </widget>
         </widget>
@@ -446,8 +301,36 @@ background-color: #d6d6d6;
      </widget>
     </widget>
    </widget>
+   <widget class="QPushButton" name="btn_addtask">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>8</y>
+      <width>180</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: 1px solid #030613; color: #030613;</string>
+    </property>
+    <property name="text">
+     <string>Add Task</string>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../img/plus.png</normaloff>../img/plus.png</iconset>
+    </property>
+   </widget>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <resources/>
  <connections>
