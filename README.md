@@ -1,5 +1,5 @@
 # ToDo-List
-Manage your activities as well as posible.
+Manage your activities as well as possible.
 
 - Create workspace
 - Create many boards for different topics
