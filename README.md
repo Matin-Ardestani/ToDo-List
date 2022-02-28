@@ -8,8 +8,6 @@ Manage your activities as well as possible.
 # About me
 Full name: Matin Ardestani
 
-Age: 14
-
 Location: Tehran, Iran
 
-More Information: [Info](https://bioly.io/MatinArdestani)
+More information: [matinardestani.com](https://matinardestani.com)
